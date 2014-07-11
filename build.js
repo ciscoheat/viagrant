@@ -10,6 +10,7 @@ var targets = {
 };
 
 if(!process.argv[2] || !(process.argv[2] in targets)) {
+	console.log('Usage: node build.js <target> <outputdir="bin">' + '\n');
 	console.log('Available targets');
 	console.log('=================');
 	for(var key in targets) {
