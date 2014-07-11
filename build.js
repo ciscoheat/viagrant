@@ -1,6 +1,3 @@
-var srcdir = 'src';
-var outputdir = 'bin';
-
 var fs = require('fs');
 
 var targets = {
@@ -20,6 +17,9 @@ if(!process.argv[2] || !(process.argv[2] in targets)) {
 	}
 	process.exit(1);
 }
+
+var srcdir = 'src';
+var outputdir = process.argv[3] ? process.argv[3] : 'bin';
 
 try {
 fs.mkdirSync(outputdir);
