@@ -13,8 +13,14 @@ echo "=== Installing Java..."
 apt-get install -y default-jdk
 haxelib install hxjava >/dev/null 2>&1
 
-echo "=== Installing Node.js..."
-apt-get install -y nodejs
-
 echo "=== Installing Phantomjs (js testing)..."
 apt-get install -y phantomjs
+
+echo "=== Installing Node.js..."
+apt-get install python-software-properties -y
+add-apt-repository ppa:chris-lea/node.js -y
+apt-get update
+# One at a time, to prevent conflicts:
+apt-get install nodejs -y
+apt-get install node-legacy -y
+apt-get install npm -y
