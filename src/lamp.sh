@@ -20,6 +20,7 @@ apt-get install -y curl
 
 echo "=== Installing PHP..."
 apt-get install -y php5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite
+echo "display_errors = On" > /etc/php5/conf.d/vagrant.ini
 
 echo "=== Installing PHP utilities (Composer)..."
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
