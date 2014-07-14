@@ -2,13 +2,13 @@ var fs = require('fs');
 
 var targets = {
 	c5: ["LAMP with concrete5 site", ["lamp"]],
-	haxe: ["Plain haxe", []],
-	node: ["Latest Node.js with npm", []],
 	git: ["Git source control", []],
-	haxe_targets: ["Haxe with environment for all targets, including Node.js", ["haxe", "node"]],
+	haxe: ["Plain haxe", []],
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["lamp", "haxe", "node", "haxe_targets", "haxe_mod_neko"]],
+	haxe_mod_neko: ["LAMP with Haxe/mod_neko", ["lamp", "haxe"]],
+	haxe_targets: ["Haxe with environment for all targets, including Node.js", ["haxe", "node"]],
 	lamp: ["LAMP box", []],
-	haxe_mod_neko: ["LAMP with Haxe/mod_neko", ["lamp", "haxe"]]
+	node: ["Latest Node.js with npm", []]
 };
 
 var args = (function(args) {
