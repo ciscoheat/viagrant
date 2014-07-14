@@ -6,7 +6,7 @@ var targets = {
 	node: ["Latest Node.js with npm", []],
 	git: ["Git source control", []],
 	haxe_targets: ["Haxe with environment for all targets, including Node.js", ["haxe", "node"]],
-	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["lamp", "haxe", "haxe_targets", "haxe_mod_neko"]],
+	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["lamp", "haxe", "node", "haxe_targets", "haxe_mod_neko"]],
 	lamp: ["LAMP box", []],
 	haxe_mod_neko: ["LAMP with Haxe/mod_neko", ["lamp", "haxe"]]
 };
@@ -42,8 +42,6 @@ var port = args.p != undefined ? args.p : 4567;
 var outputdir = args.o != undefined ? args.o : 'bin';
 
 process.argv.splice(0, 2);
-
-console.log(process.argv);
 
 try {
 fs.mkdirSync(outputdir);
