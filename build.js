@@ -28,7 +28,7 @@ var args = (function(args) {
 })(['p', 'o']);
 
 if(!process.argv[2] || !(process.argv[2] in targets)) {
-	console.log('Usage: node build.js [-p port=4567] [-o dir="bin"] <main-target> <targets...>' + '\n');
+	console.log('Usage: node build.js [-p port=4567:80] [-o dir="bin"] <main-target> <targets...>' + '\n');
 	console.log('Available targets');
 	console.log('=================');
 	for(var key in targets) {
@@ -38,7 +38,10 @@ if(!process.argv[2] || !(process.argv[2] in targets)) {
 }
 
 var srcdir = 'src';
-var port = args.p != undefined ? args.p : 4567;
+
+var ports = args.p != undefined ? args.p.split(':') : [4567];
+if(!ports[1]) ports[1] = 80;
+
 var outputdir = args.o != undefined ? args.o : 'bin';
 
 process.argv.splice(0, 2);
@@ -48,7 +51,9 @@ fs.mkdirSync(outputdir);
 } catch(_) {}
 
 var file = fs.readFileSync(srcdir + '/Vagrantfile', {encoding: 'utf8'});
-var forward = port != 0 ? 'config.vm.network "forwarded_port", guest: 80, host: ' + port : '';
+
+var forward = 'config.vm.network "forwarded_port", guest: ' + ports[1] + ', host: ' + ports[0];
+if(ports[0] == 0) forward = '# ' + forward;
 
 file = file.replace('{{forwarded_port}}', forward);
 fs.writeFileSync(outputdir + '/Vagrantfile', file);
@@ -56,7 +61,7 @@ fs.writeFileSync(outputdir + '/Vagrantfile', file);
 var deps = ["header"].concat(targets[process.argv[0]][1]).concat(process.argv);
 var output = fs.writeFileSync(outputdir + '/provision.sh', '');
 
-console.log(deps);
+//console.log(deps);
 
 for(var i in deps) {
 	var file = srcdir + '/' + deps[i] + '.sh';
