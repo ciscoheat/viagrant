@@ -38,7 +38,4 @@ mysql -u root -e "create database test"
 echo "=== Restarting Apache..."
 service apache2 restart
 
-echo "=== (L)AMP setup completed"
-echo "Apache: localhost:4567 (www folder)"
-echo "SSH:    localhost:2222 (vagrant/vagrant)"
-echo "Mysql:  'test'         (root/<no pwd>)"
+echo "=== LAMP setup completed."
