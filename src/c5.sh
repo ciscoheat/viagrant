@@ -38,4 +38,12 @@ RewriteRule . index.php [L]
 </IfModule>
 EOL
 
+# Add some useful defines to site.php
+cat >> ./www/config/site.php <<EOL
+
+define('DATE_FORM_HELPER_FORMAT_HOUR', '24');
+define('ENABLE_NEWSFLOW_OVERLAY', false);
+EOL
+
+
 echo "=== Done!"
