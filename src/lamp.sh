@@ -19,8 +19,12 @@ echo "=== Installing curl..."
 apt-get install -y curl
 
 echo "=== Installing PHP..."
-apt-get install -y php5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite
-echo "display_errors = On" > /etc/php5/conf.d/vagrant.ini
+apt-get install -y php5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite php5-xdebug
+
+cat > /etc/php5/conf.d/vagrant.ini <<EOL
+display_errors = On
+html_errors = On
+EOL
 
 echo "=== Installing PHP utilities (Composer)..."
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
