@@ -4,7 +4,7 @@ mysql -u root -e "create database c5"
 
 if [ ! -f concrete5.* ]; then
 	echo "=== Downloading concrete5..."
-	wget -q -O concrete5.latest.zip http://www.concrete5.org/download_file/-/view/66159/8497/
+	wget -q -O concrete5.latest.zip http://www.concrete5.org/download_file/-/view/70913/8497
 fi
 
 echo "=== Unzipping concrete5..."
@@ -25,6 +25,9 @@ rm ./install-concrete5.php
 
 # Enable pretty URL:s in the DB
 mysql -u root -e "use c5; INSERT INTO Config (cfKey, timestamp, cfValue) VALUES ('URL_REWRITING', NOW(), 1)"
+
+# Add adodb table for query logging
+mysql -u root -e "use c5; CREATE TABLE adodb_logsql (created DATETIME NOT NULL, sql0 VARCHAR(250) NOT NULL, sql1 TEXT NOT NULL, params TEXT NOT NULL, tracer TEXT NOT NULL, timer DECIMAL(16,6) NOT NULL)"
 
 # Write a .htaccess file for pretty URL:s
 cat > ./www/.htaccess <<EOL
