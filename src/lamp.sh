@@ -19,7 +19,7 @@ echo "=== Installing curl..."
 apt-get install -y curl
 
 echo "=== Installing PHP..."
-apt-get install -y php5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite php5-xdebug
+apt-get install -y php5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite php5-xdebug php-apc
 
 cat > /etc/php5/conf.d/vagrant.ini <<EOL
 display_errors = On
@@ -43,3 +43,5 @@ echo "=== Restarting Apache..."
 service apache2 restart
 
 echo "=== LAMP setup completed."
+echo "Change timezone: sudo dpkg-reconfigure tzdata"
+echo "Change hostname: sudo pico /etc/hostname && sudo pico /etc/hosts"
