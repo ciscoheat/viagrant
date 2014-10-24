@@ -3,8 +3,8 @@ echo "=== Creating Mysql DB (c5)..."
 mysql -u root -e "create database c5"
 
 if [ ! -f concrete5.* ]; then
-	echo "=== Downloading concrete5.7..."
-	wget -q -O concrete5.latest.zip http://www.concrete5.org/download_file/-/view/71216/
+	echo "=== Downloading concrete5.7 (version 5.7.1)..."
+	wget -q -O concrete5.latest.zip http://www.concrete5.org/download_file/-/view/72166/
 fi
 
 echo "=== Unzipping concrete5.7..."
@@ -31,28 +31,33 @@ cat > ./www/application/config/generated_overrides/concrete.php <<EOL
 
 /**
  * -----------------------------------------------------------------------------
- * Generated 2014-09-24T00:23:46+00:00
-
+ * Generated 2014-10-24T00:00:00+00:00
+ *
  * @item      seo.url_rewriting
  * @group     concrete
  * @namespace null
  * -----------------------------------------------------------------------------
  */
 return array(
-    'site' => 'concrete5 Site',
+    'external' => array(
+        'news_overlay' => false
+    ),
     'misc' => array(
-        'access_entity_updated' => 1411516320,
-        'latest_version' => '5.6.3.1',
         'seen_introduction' => true
     ),
     'seo' => array(
         'url_rewriting' => 1
+    ),
+    'debug' => array(
+        'detail' => 'debug',
+        'display_errors' => true
     )
 );
 EOL
 
 # Write a .htaccess file for pretty URL:s
 cat > ./www/.htaccess <<EOL
+# -- concrete5 urls start --
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
@@ -61,6 +66,7 @@ RewriteCond %{REQUEST_FILENAME}/index.html !-f
 RewriteCond %{REQUEST_FILENAME}/index.php !-f
 RewriteRule . index.php [L]
 </IfModule>
+# -- concrete5 urls end --
 EOL
 
 chown -R vagrant:vagrant ./www/application/config/generated_overrides
