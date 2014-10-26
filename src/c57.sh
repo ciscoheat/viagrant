@@ -3,8 +3,8 @@ echo "=== Creating Mysql DB (c5)..."
 mysql -u root -e "create database c5"
 
 if [ ! -f concrete5.* ]; then
-	echo "=== Downloading concrete5.7 (version 5.7.1)..."
-	wget -q -O concrete5.latest.zip http://www.concrete5.org/download_file/-/view/72166/
+	echo "=== Downloading concrete5.7 (version 5.7.2)..."
+	wget -q -O concrete5.7.2.zip http://www.concrete5.org/download_file/-/view/72447/
 fi
 
 echo "=== Unzipping concrete5.7..."
