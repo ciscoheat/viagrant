@@ -9,6 +9,7 @@ var targets = {
 	haxe_mod_neko: ["LAMP with Haxe/mod_neko", ["lamp", "haxe"]],
 	haxe_targets: ["Haxe with environment for all targets, including Node.js", ["haxe", "node"]],
 	lamp: ["LAMP box", []],
+	mongodb: ["Latest MongoDB", []],
 	node: ["Latest Node.js with npm", []]
 };
 
@@ -29,7 +30,7 @@ var args = (function(args) {
 })(['p', 'o']);
 
 if(!process.argv[2] || !(process.argv[2] in targets)) {
-	console.log('Usage: node build.js [-p port=4567:80] [-o dir="bin"] <main-target> <targets...>' + '\n');
+	console.log('Usage: node build.js [-p 4567:80] [-o "bin"] <main-target> <targets...>' + '\n');
 	console.log('Available targets');
 	console.log('=================');
 	for(var key in targets) {
