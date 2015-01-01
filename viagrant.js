@@ -11,7 +11,7 @@ var targets = {
 	lamp: ["LAMP box", []],
 	mongodb: ["Latest MongoDB", []],
 	node: ["Latest Node.js with npm", []],
-	ruby: ["Ruby with RubyGems", []]
+	ruby: ["Latest Ruby with rvm", []]
 };
 
 var args = (function(args) {
