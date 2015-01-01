@@ -10,7 +10,8 @@ var targets = {
 	haxe_targets: ["Haxe with environment for all targets, including Node.js", ["haxe", "node"]],
 	lamp: ["LAMP box", []],
 	mongodb: ["Latest MongoDB", []],
-	node: ["Latest Node.js with npm", []]
+	node: ["Latest Node.js with npm", []],
+	ruby: ["Ruby with RubyGems", []]
 };
 
 var args = (function(args) {
@@ -30,7 +31,7 @@ var args = (function(args) {
 })(['p', 'o']);
 
 if(!process.argv[2] || !(process.argv[2] in targets)) {
-	console.log('Usage: node build.js [-p 4567:80] [-o "bin"] <main-target> <targets...>' + '\n');
+	console.log('Usage: node viagrant.js [-p 4567:80] [-o "bin"] <main-target> <targets...>' + '\n');
 	console.log('Available targets');
 	console.log('=================');
 	for(var key in targets) {
