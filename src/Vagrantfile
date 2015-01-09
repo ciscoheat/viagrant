@@ -46,6 +46,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |v|
     v.customize ["modifyvm", :id, "--memory", 512]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"] # Use NAT DNS host resolver
+    # Allow Node.js to create symlinks for packages:
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   end
 
   # Provider-specific configuration so you can fine-tune various
