@@ -1,2 +1,2 @@
 @echo off
-node build.js %*
+node viagrant.js %*
