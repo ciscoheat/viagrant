@@ -14,6 +14,7 @@ var targets = {
 	ruby: ["Latest Ruby with rvm", []]
 };
 
+// Process arguments
 var args = (function(args) {
 	var output = {};
 	for (var j = 0; j < args.length; j++) {
@@ -28,10 +29,11 @@ var args = (function(args) {
 		if(found) process.argv.splice(found, 2);
 	}
 	return output;
-})(['p', 'o']);
+})(['p', 'o', 'n']);
 
+// Usage
 if(!process.argv[2] || !(process.argv[2] in targets)) {
-	console.log('Usage: node viagrant.js [-p 4567:80] [-o "bin"] <main-target> <targets...>' + '\n');
+	console.log('Usage: node viagrant.js [-p 4567:80] [-o "bin"] [-n "servername"] <main-target> <targets...>' + '\n');
 	console.log('Available targets');
 	console.log('=================');
 	for(var key in targets) {
@@ -42,34 +44,47 @@ if(!process.argv[2] || !(process.argv[2] in targets)) {
 
 var srcdir = 'src';
 
+// Set default values for arguments unless found
 var ports = args.p != undefined ? args.p.split(':') : [4567];
 if(!ports[1]) ports[1] = 80;
 
 var outputdir = args.o != undefined ? args.o : 'bin';
+var name = args.n != undefined ? args.n : '';
 
+// Remove script from arguments, leaving only the targets.
 process.argv.splice(0, 2);
 
 try {
-fs.mkdirSync(outputdir);
+	fs.mkdirSync(outputdir);
 } catch(_) {}
 
-var file = fs.readFileSync(srcdir + '/Vagrantfile', {encoding: 'utf8'});
+// Replace variables in the Vagrantfile
+var vagrantFile = fs.readFileSync(srcdir + '/Vagrantfile', {encoding: 'utf8'});
 
 var forward = 'config.vm.network "forwarded_port", guest: ' + ports[1] + ', host: ' + ports[0];
 if(ports[0] == 0) forward = '# ' + forward;
 
-file = file.replace('{{forwarded_port}}', forward);
-fs.writeFileSync(outputdir + '/Vagrantfile', file);
+vagrantFile = vagrantFile.replace('{{forwarded_port}}', forward);
+vagrantFile = vagrantFile.replace('{{name}}', 'v.name = "' + name + '"');
 
+fs.writeFileSync(outputdir + '/Vagrantfile', vagrantFile);
+
+// Create the provision file
 var deps = ["header"].concat(targets[process.argv[0]][1]).concat(process.argv);
 var output = fs.writeFileSync(outputdir + '/provision.sh', '');
-
-//console.log(deps);
 
 for(var i in deps) {
 	var file = srcdir + '/' + deps[i] + '.sh';
 	if(!fs.existsSync(file)) continue;
 	
-	var input = fs.readFileSync(file);
+	var input = fs.readFileSync(file, {encoding: 'utf8'});
+
+	// Replace variables in header file.
+	if(deps[i] == "header") {
+		var rename = name ? "sed -i 's/precise64/"+name+"/g' /etc/hostname /etc/hosts" : '';
+		input = input.replace('{{rename}}', rename);
+	}
+
+	// Write to the provision file
 	fs.appendFileSync(outputdir + '/provision.sh', input);
 }

@@ -37,6 +37,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Default value: false
   # config.ssh.forward_agent = true
 
+  # If you're not worrying about security and prefer to use the shared
+  # "insecure_private_key" in the VAGRANT_HOME directory instead of Vagrant
+  # auto-generating a new one in the local .vagrant dir:
+  # config.ssh.insert_key = false
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
@@ -44,6 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.synced_folder "./www", "/var/www"
 
   config.vm.provider :virtualbox do |v|
+    {{name}}
     v.customize ["modifyvm", :id, "--memory", 512]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"] # Use NAT DNS host resolver
     # Allow Node.js to create symlinks for packages:
