@@ -2,9 +2,11 @@
 echo "=== Creating Mysql DB (c5)..."
 mysql -u root -e "create database c5"
 
+echo "=== Downloading concrete5..."
 if [ ! -f concrete5.* ]; then
-	echo "=== Downloading concrete5..."
-	wget -q -O concrete5.latest.zip http://www.concrete5.org/download_file/-/view/70913/8497
+	wget -q -O concrete5.6.3.3.zip http://www.concrete5.org/download_file/-/view/75930/8497
+else
+	echo "Concrete zip package already exists, using it instead of downloading."
 fi
 
 echo "=== Unzipping concrete5..."
