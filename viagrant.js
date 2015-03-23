@@ -11,6 +11,8 @@ var targets = {
 	lamp: ["LAMP box", []],
 	mongodb: ["Latest MongoDB", []],
 	node: ["Latest Node.js with npm", []],
+	bower: ["Bower, the web package manager", ["node", "git"]],
+	python3: ["Python 3.4", []],
 	ruby: ["Latest Ruby with rvm", []]
 };
 
@@ -65,12 +67,19 @@ var forward = 'config.vm.network "forwarded_port", guest: ' + ports[1] + ', host
 if(ports[0] == 0) forward = '# ' + forward;
 
 vagrantFile = vagrantFile.replace('{{forwarded_port}}', forward);
-vagrantFile = vagrantFile.replace('{{name}}', 'v.name = "' + name + '"');
+vagrantFile = vagrantFile.replace('{{name}}', name ? ('v.name = "' + name + '"') : '');
 
 fs.writeFileSync(outputdir + '/Vagrantfile', vagrantFile);
 
-// Create the provision file
-var deps = ["header"].concat(targets[process.argv[0]][1]).concat(process.argv);
+// Create the provision file from targets
+var deps = ["header"];
+for(var i in process.argv) {
+	// Add dependencies first
+	deps = deps.concat(targets[process.argv[i]][1]).concat(process.argv[i]);
+}
+// Filter multiple targets
+deps = deps.filter(function(value, index, self) { return self.indexOf(value) === index; });
+
 var output = fs.writeFileSync(outputdir + '/provision.sh', '');
 
 for(var i in deps) {
