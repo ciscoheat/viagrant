@@ -43,5 +43,3 @@ echo "=== Restarting Apache..."
 service apache2 restart
 
 echo "=== LAMP setup completed."
-echo "Change timezone: sudo dpkg-reconfigure tzdata"
-echo "Change hostname: sudo pico /etc/hostname && sudo pico /etc/hosts"
