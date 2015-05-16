@@ -4,7 +4,7 @@ mysql -u root -e "create database c5"
 
 echo "=== Downloading concrete5.7..."
 if [ ! -f concrete5.* ]; then
-    wget -q -O concrete5.7.3.1.zip http://www.concrete5.org/download_file/-/view/74619/
+    wget -q -O concrete5.7.4.1.zip http://www.concrete5.org/download_file/-/view/78949/
 else
     echo "Concrete zip package already exists, using it instead of downloading."
 fi

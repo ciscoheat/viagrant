@@ -1,14 +1,13 @@
 var fs = require('fs');
 
 var targets = {
-	c5: ["LAMP with concrete5 site", ["lamp"]],
-	c57: ["LAMP with concrete5.7 site", ["lamp"]],
+	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
+	c57: ["LAMP with concrete5 5.7.4.1", ["lamp"]],
 	git: ["Git source control", []],
-	haxe: ["Haxe 3.1.3", []],
-	haxe32: ["Haxe 3.2.0-rc2", []],
-	haxe_full: ["Haxe 3.1.3 for all targets and LAMP with mod_neko", ["lamp", "haxe", "node", "haxe_targets", "haxe_mod_neko"]],
-	haxe_mod_neko: ["LAMP with Haxe 3.1.3 and mod_neko", ["lamp", "haxe"]],
-	haxe_targets: ["Haxe 3.1.3 with environment for all targets, including Node.js", ["haxe", "node"]],
+	haxe: ["Haxe 3.2.0", []],
+	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["lamp", "haxe", "node", "haxe_targets", "haxe_mod_neko"]],
+	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
+	haxe_targets: ["Haxe with environment for all targets, including Node.js", ["haxe", "node"]],
 	lamp: ["Ubuntu 12.04, Apache 2.2.22, Mysql 5.5.4, PHP 5.3", []],
 	mongodb: ["Latest MongoDB", []],
 	node: ["Latest Node.js with npm", []],
@@ -78,6 +77,8 @@ for(var i in process.argv) {
 	// Add dependencies first
 	deps = deps.concat(targets[process.argv[i]][1]).concat(process.argv[i]);
 }
+deps.push("footer");
+
 // Filter multiple targets
 deps = deps.filter(function(value, index, self) { return self.indexOf(value) === index; });
 
@@ -89,8 +90,8 @@ for(var i in deps) {
 	
 	var input = fs.readFileSync(file, {encoding: 'utf8'});
 
-	// Replace variables in header file.
-	if(deps[i] == "header") {
+	// Replace a special variable in footer.
+	if(deps[i] == "footer") {
 		var rename = name ? "sed -i 's/precise64/"+name+"/g' /etc/hostname /etc/hosts" : '';
 		input = input.replace('{{rename}}', rename);
 	}
