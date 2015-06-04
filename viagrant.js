@@ -2,7 +2,7 @@ var fs = require('fs');
 
 var targets = {
 	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
-	c57: ["LAMP with concrete5 5.7.4.1", ["lamp"]],
+	c57: ["LAMP with concrete5 5.7.4.2", ["lamp"]],
 	git: ["Git source control", []],
 	haxe: ["Haxe 3.2.0", []],
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["lamp", "haxe", "node", "haxe_targets", "haxe_mod_neko"]],
