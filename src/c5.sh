@@ -49,6 +49,3 @@ cat >> ./www/config/site.php <<EOL
 define('DATE_FORM_HELPER_FORMAT_HOUR', '24');
 define('ENABLE_NEWSFLOW_OVERLAY', false);
 EOL
-
-
-echo "=== Done!"

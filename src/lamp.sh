@@ -41,5 +41,3 @@ mysql -u root -e "create database test"
 
 echo "=== Restarting Apache..."
 service apache2 restart
-
-echo "=== LAMP setup completed."
