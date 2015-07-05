@@ -13,7 +13,7 @@ var targets = {
 	mongodb: ["Latest MongoDB", []],
 	node: ["Latest Node.js with npm", []],
 	phantomjs: ["PhantomJS 1.9.8", ["node"]],
-	python3: ["Python 3.4", []],
+	python3: ["Python 3.2.3", []],
 	ruby: ["Latest Ruby with rvm", []]
 };
 

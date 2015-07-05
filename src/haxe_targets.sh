@@ -15,3 +15,6 @@ haxelib install hxjava >/dev/null 2>&1
 
 echo "=== Installing PHP..."
 apt-get install -y php5-cli
+
+echo "=== Installing Flash (xvfb)..."
+apt-get install -y xvfb
