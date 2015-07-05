@@ -1,17 +1,18 @@
 var fs = require('fs');
 
 var targets = {
+	bower: ["Bower, the web package manager", ["node", "git"]],
 	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
 	c57: ["LAMP with concrete5 5.7.4.2", ["lamp"]],
 	git: ["Git source control", []],
 	haxe: ["Haxe 3.2.0", []],
-	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["lamp", "haxe", "node", "haxe_targets", "haxe_mod_neko"]],
+	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
 	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
-	haxe_targets: ["Haxe with environment for all targets, including Node.js", ["haxe", "node"]],
+	haxe_targets: ["Haxe with environment for all targets", ["node", "phantomjs", "haxe"]],
 	lamp: ["Ubuntu 12.04, Apache 2.2.22, Mysql 5.5.4, PHP 5.3", []],
 	mongodb: ["Latest MongoDB", []],
 	node: ["Latest Node.js with npm", []],
-	bower: ["Bower, the web package manager", ["node", "git"]],
+	phantomjs: ["PhantomJS 1.9.8, headless browser", ["node"]],
 	python3: ["Python 3.4", []],
 	ruby: ["Latest Ruby with rvm", []]
 };
