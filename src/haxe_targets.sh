@@ -10,7 +10,6 @@ apt-get install -y mono-devel mono-mcs
 haxelib install hxcs >/dev/null 2>&1
 
 echo "=== Installing Java..."
-apt-get install -y default-jdk
 haxelib install hxjava >/dev/null 2>&1
 
 echo "=== Installing PHP..."
