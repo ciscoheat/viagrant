@@ -1,6 +1,7 @@
 var fs = require('fs');
 
 var targets = {
+	arangodb: ["ArangoDB 2.6.2", []],
 	bower: ["Bower, the web package manager", ["node", "git"]],
 	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
 	c57: ["LAMP with concrete5 5.7.4.2", ["lamp"]],
