@@ -19,5 +19,5 @@ cd /etc/init.d
 update-rc.d orientdb.sh defaults
 /etc/init.d/orientdb.sh start
 popd
-echo "OrientDB server deamon:"
+echo "OrientDB server daemon:"
 echo "sudo /etc/init.d/orientdb.sh <start|stop|status>"
