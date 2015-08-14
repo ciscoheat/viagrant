@@ -4,7 +4,7 @@ mysql -u root -e "create database c5"
 
 echo "=== Downloading concrete5.7..."
 if [ ! -f concrete5.* ]; then
-    wget -q -O concrete5.7.4.2.zip http://www.concrete5.org/download_file/-/view/79252/
+    wget -q --no-check-certificate -O concrete5.7.5.zip https://www.concrete5.org/download_file/-/view/81497/
 else
     echo "Concrete zip package already exists, using it instead of downloading."
 fi
@@ -18,7 +18,7 @@ rm -rf concrete5.*/*
 rmdir concrete5.*
 
 echo "=== Installing concrete5.7..."
-wget -q --no-check-certificate https://raw.githubusercontent.com/concrete5/concrete5/release/5.7.4.2/cli/install-concrete5.php
+wget -q --no-check-certificate https://raw.githubusercontent.com/concrete5/concrete5/release/5.7.4.3/cli/install-concrete5.php
 chmod 755 ./install-concrete5.php
 # Starting point can be elemental_full or elemental_blank
 ./install-concrete5.php --db-server=localhost --db-username=root --db-database=c5 \
@@ -32,11 +32,11 @@ cat > ./www/application/config/generated_overrides/concrete.php <<EOL
 <?php
 return array(
     'site' => 'concrete5 Site',
-    'version_installed' => '5.7.4.2',
+    'version_installed' => '5.7.5',
     'misc' => array(
-        'access_entity_updated' => 1433518474,
+        'access_entity_updated' => 1439545791,
         'seen_introduction' => true,
-        'latest_version' => '5.7.4.2'
+        'latest_version' => '5.7.5'
     ),
     'external' => array(
         'news_overlay' => false,

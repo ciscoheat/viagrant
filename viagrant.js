@@ -4,7 +4,7 @@ var targets = {
 	arangodb: ["ArangoDB 2.6.2", []],
 	bower: ["Bower, the web package manager", ["node", "git"]],
 	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
-	c57: ["LAMP with concrete5 5.7.4.2", ["lamp"]],
+	c57: ["LAMP with concrete5 5.7.5", ["lamp"]],
 	git: ["Git source control", []],
 	haxe: ["Haxe 3.2.0", []],
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
