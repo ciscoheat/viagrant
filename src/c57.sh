@@ -4,7 +4,7 @@ mysql -u root -e "create database c5"
 
 echo "=== Downloading concrete5.7..."
 if [ ! -f concrete5.* ]; then
-    wget -q --no-check-certificate -O concrete5.7.5.zip https://www.concrete5.org/download_file/-/view/81497/
+    wget -q --no-check-certificate -O concrete5.7.5.1.zip http://www.concrete5.org/download_file/-/view/81601/
 else
     echo "Concrete zip package already exists, using it instead of downloading."
 fi
@@ -32,11 +32,11 @@ cat > ./www/application/config/generated_overrides/concrete.php <<EOL
 <?php
 return array(
     'site' => 'concrete5 Site',
-    'version_installed' => '5.7.5',
+    'version_installed' => '5.7.5.1',
     'misc' => array(
         'access_entity_updated' => 1439545791,
         'seen_introduction' => true,
-        'latest_version' => '5.7.5'
+        'latest_version' => '5.7.5.1'
     ),
     'external' => array(
         'news_overlay' => false,

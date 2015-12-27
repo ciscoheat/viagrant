@@ -18,7 +18,7 @@ rm -rf concrete5.*/*
 rmdir concrete5.*
 
 echo "=== Installing concrete5..."
-wget -q --no-check-certificate https://raw.githubusercontent.com/concrete5/concrete5/master/cli/install-concrete5.php
+wget -q --no-check-certificate https://raw.githubusercontent.com/concrete5/concrete5-legacy/master/cli/install-concrete5.php
 chmod 755 ./install-concrete5.php
 ./install-concrete5.php --db-server=localhost --db-username=root --db-database=c5 \
 	--admin-password=admin --admin-email=admin@example.com \
