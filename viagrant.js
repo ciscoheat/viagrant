@@ -77,9 +77,19 @@ fs.writeFileSync(outputdir + '/Vagrantfile', vagrantFile);
 
 // Create the provision file from targets
 var deps = ["header"];
+
+function addDeps(name) {
+	if(deps.indexOf(name) >= 0) return;
+	deps.push(name);
+	if(!targets[name]) return;
+
+	targets[name][1].forEach(function(target) {
+		addDeps(target);
+	});
+}
+
 for(var i in process.argv) {
-	// Add dependencies first
-	deps = deps.concat(targets[process.argv[i]][1]).concat(process.argv[i]);
+	addDeps(process.argv[i]);
 }
 deps.push("footer");
 
