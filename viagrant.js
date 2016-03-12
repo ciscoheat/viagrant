@@ -1,12 +1,12 @@
 var fs = require('fs');
 
 var targets = {
-	arangodb: ["ArangoDB 2.6.2", []],
+	arangodb: ["ArangoDB 2.8.4", []],
 	bower: ["Bower, the web package manager", ["node", "git"]],
 	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
 	c57: ["LAMP with concrete5 5.7.5.1", ["lamp"]],
 	git: ["Git source control", []],
-	haxe: ["Haxe 3.2.0", []],
+	haxe: ["Haxe 3.2.1", []],
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
 	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
 	haxe_targets: ["Haxe with environment for all targets", ["node", "phantomjs", "python3", "java", "haxe"]],
@@ -16,7 +16,7 @@ var targets = {
 	node: ["Latest Node.js with npm", []],
 	orientdb: ["OrientDB 2.1-rc5", ["java"]],
 	phantomjs: ["PhantomJS 1.9.8", ["node"]],
-	python3: ["Python 3.2.3", []],
+	python3: ["Python 3.4", []],
 	ruby: ["Latest Ruby with rvm", []]
 };
 
