@@ -1,6 +1,5 @@
 
 echo "=== Installing Java 8 JDK (openjdk)..."
-apt-get install python-software-properties -y
 add-apt-repository ppa:openjdk-r/ppa -y
 apt-get update
 apt-get install openjdk-8-jdk -y

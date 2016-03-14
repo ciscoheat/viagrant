@@ -7,7 +7,7 @@ var targets = {
 	c57: ["LAMP with concrete5 5.7.5.1", ["lamp"]],
 	git: ["Git source control", []],
 	haxe: ["Haxe 3.2.1", []],
-	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
+	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["lamp", "haxe", "haxe_mod_neko", "haxe_targets"]],
 	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
 	haxe_targets: ["Haxe with environment for all targets", ["node", "phantomjs", "python3", "java", "haxe"]],
 	java: ["Java 8 JDK (openjdk)", []],
