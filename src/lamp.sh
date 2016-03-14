@@ -24,7 +24,7 @@ apt-get install -y php5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite php5-x
 cat > /etc/php5/conf.d/vagrant.ini <<EOL
 display_errors = On
 html_errors = On
-xdebug.max_nesting_level=1000
+xdebug.max_nesting_level=10000
 EOL
 
 echo "=== Installing PHP utilities (Composer)..."
