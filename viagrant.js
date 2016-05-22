@@ -51,7 +51,7 @@ if(!process.argv[2] || !(process.argv[2] in targets)) {
 var srcdir = 'src';
 
 // Set default values for arguments unless found
-var ports = args.p != undefined ? args.p.split(':') : [4567];
+var ports = args.p != undefined ? args.p.split(':') : [0];
 if(!ports[1]) ports[1] = 80;
 
 var outputdir = args.o != undefined ? args.o : 'bin';
@@ -108,6 +108,11 @@ for(var i in deps) {
 	if(deps[i] == "footer") {
 		var rename = name ? "sed -i 's/precise64/"+name+"/g' /etc/hostname /etc/hosts" : '';
 		input = input.replace('{{rename}}', rename);
+
+		if(name)
+			input = input.replace('{{reload}}', 'echo ""\necho "Execute \'vagrant reload\' to rename the VM and complete the process."');
+		else
+			input = input.replace('{{reload}}', '');
 	}
 
 	// Write to the provision file
