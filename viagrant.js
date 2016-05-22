@@ -1,6 +1,8 @@
-var fs = require('fs');
+"use strict";
 
-var targets = {
+const fs = require('fs')
+
+const targets = {
 	arangodb: ["ArangoDB 2.8.9", []],
 	bower: ["Bower, the web package manager", ["node", "git"]],
 	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
@@ -17,14 +19,14 @@ var targets = {
 	phantomjs: ["PhantomJS 1.9.8", ["node"]],
 	python3: ["Python 3.4", []],
 	ruby: ["Latest Ruby with rvm", []]
-};
+}
 
 // Process arguments
-var args = (function(args) {
-	var output = {};
-	for (var j = 0; j < args.length; j++) {
-		var found = 0
-		for (var i = 0; i < process.argv.length; i++) {
+const args = (function(args) {
+	const output = {};
+	for (let j = 0; j < args.length; j++) {
+		let found = 0
+		for (let i = 0; i < process.argv.length; i++) {
 			if(process.argv[i] == "-" + args[j]) {
 				output[args[j]] = process.argv[i+1];
 				found = i;
@@ -41,79 +43,77 @@ if(!process.argv[2] || !(process.argv[2] in targets)) {
 	console.log('Usage: node viagrant.js [-p 4567:80] [-o "bin"] [-n "servername"] <main-target> <targets...>' + '\n');
 	console.log('Available targets');
 	console.log('=================');
-	for(var key in targets) {
+	for(let key in targets) {
 		console.log(key + ": " + targets[key][0]);
 	}
 	process.exit(1);
 }
 
-var srcdir = 'src';
+const srcdir = 'src'
 
 // Set default values for arguments unless found
-var ports = args.p != undefined ? args.p.split(':') : [0];
-if(!ports[1]) ports[1] = 80;
+const ports = args.p != undefined ? args.p.split(':') : [0]
+if(!ports[1]) ports[1] = 80
 
-var outputdir = args.o != undefined ? args.o : 'bin';
-var name = args.n != undefined ? args.n : '';
+const outputdir = args.o != undefined ? args.o : 'bin'
+const name = args.n != undefined ? args.n : ''
 
 // Remove script from arguments, leaving only the targets.
-process.argv.splice(0, 2);
+process.argv.splice(0, 2)
 
 try {
-	fs.mkdirSync(outputdir);
+	fs.mkdirSync(outputdir)
 } catch(_) {}
 
 // Replace variables in the Vagrantfile
-var vagrantFile = fs.readFileSync(srcdir + '/Vagrantfile', {encoding: 'utf8'});
+const forward = (ports[0] == 0 ? "# " : "") + `config.vm.network "forwarded_port", guest: ${ports[1]}, host: ${ports[0]}`
 
-var forward = 'config.vm.network "forwarded_port", guest: ' + ports[1] + ', host: ' + ports[0];
-if(ports[0] == 0) forward = '# ' + forward;
+let vagrantFile = fs.readFileSync(srcdir + '/Vagrantfile', {encoding: 'utf8'})
+vagrantFile = vagrantFile.replace('{{forwarded_port}}', forward)
+vagrantFile = vagrantFile.replace('{{name}}', name ? (`v.name = "${name}"`) : '')
 
-vagrantFile = vagrantFile.replace('{{forwarded_port}}', forward);
-vagrantFile = vagrantFile.replace('{{name}}', name ? ('v.name = "' + name + '"') : '');
-
-fs.writeFileSync(outputdir + '/Vagrantfile', vagrantFile);
+fs.writeFileSync(outputdir + '/Vagrantfile', vagrantFile)
 
 // Create the provision file from targets
-var deps = ["header"];
+let deps = ["header"]
 
 function addDeps(name) {
-	if(deps.indexOf(name) >= 0) return;
-	deps.push(name);
-	if(!targets[name]) return;
+	if(deps.indexOf(name) >= 0) return
+	deps.push(name)
+
+	if(!targets[name]) return
 
 	targets[name][1].forEach(function(target) {
 		addDeps(target);
-	});
+	})
 }
 
-for(var i in process.argv) {
-	addDeps(process.argv[i]);
-}
-deps.push("footer");
+for(let i in process.argv) addDeps(process.argv[i])
+
+deps.push("footer")
 
 // Filter multiple targets
-deps = deps.filter(function(value, index, self) { return self.indexOf(value) === index; });
+deps = deps.filter(function(value, index, self) { return self.indexOf(value) === index })
 
-var output = fs.writeFileSync(outputdir + '/provision.sh', '');
+const output = fs.writeFileSync(outputdir + '/provision.sh', '')
 
-for(var i in deps) {
-	var file = srcdir + '/' + deps[i] + '.sh';
-	if(!fs.existsSync(file)) continue;
+for(let i in deps) {
+	const file = srcdir + '/' + deps[i] + '.sh'
+	if(!fs.existsSync(file)) continue
 	
-	var input = fs.readFileSync(file, {encoding: 'utf8'});
+	let input = fs.readFileSync(file, {encoding: 'utf8'})
 
 	// Replace a special variable in footer.
 	if(deps[i] == "footer") {
-		var rename = name ? "sed -i 's/precise64/"+name+"/g' /etc/hostname /etc/hosts" : '';
-		input = input.replace('{{rename}}', rename);
+		const rename = name ? "sed -i 's/precise64/"+name+"/g' /etc/hostname /etc/hosts" : ''
+		input = input.replace('{{rename}}', rename)
 
 		if(name)
-			input = input.replace('{{reload}}', 'echo ""\necho "Execute \'vagrant reload\' to rename the VM and complete the process."');
+			input = input.replace('{{reload}}', 'echo ""\necho "Execute \'vagrant reload\' to rename the VM and complete the process."')
 		else
-			input = input.replace('{{reload}}', '');
+			input = input.replace('{{reload}}', '')
 	}
 
 	// Write to the provision file
-	fs.appendFileSync(outputdir + '/provision.sh', input);
+	fs.appendFileSync(outputdir + '/provision.sh', input)
 }
