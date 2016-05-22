@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 var targets = {
-	arangodb: ["ArangoDB 2.8.4", []],
+	arangodb: ["ArangoDB 2.8.9", []],
 	bower: ["Bower, the web package manager", ["node", "git"]],
 	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
 	c57: ["LAMP with concrete5 5.7.5.1", ["lamp"]],
@@ -13,8 +13,7 @@ var targets = {
 	java: ["Java 8 JDK (openjdk)", []],
 	lamp: ["Ubuntu 12.04, Apache 2.2.22, Mysql 5.5.4, PHP 5.3", []],
 	mongodb: ["Latest MongoDB", []],
-	node: ["Latest Node.js with npm", []],
-	orientdb: ["OrientDB 2.1-rc5", ["java"]],
+	node: ["Node.js 5.11.1 with npm", []],
 	phantomjs: ["PhantomJS 1.9.8", ["node"]],
 	python3: ["Python 3.4", []],
 	ruby: ["Latest Ruby with rvm", []]

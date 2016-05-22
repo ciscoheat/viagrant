@@ -15,9 +15,6 @@ echo EnableSendFile Off > /etc/apache2/conf.d/virtualbox-bugfix
 rm -rf /var/www
 ln -fs /vagrant/www /var/www
 
-echo "=== Installing curl..."
-apt-get install -y curl
-
 echo "=== Installing PHP..."
 apt-get install -y php5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite php5-xdebug php-apc
 
