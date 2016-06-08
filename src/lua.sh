@@ -21,5 +21,6 @@ cd ..
 rm -f luarocks-2.3.0.tar.gz
 rm -rf luarocks-2.3.0
 
-# Install lua pcre so it works with Haxe
+# Install lua libraries so it works with Haxe
 luarocks install lrexlib-pcre 2.7.2-1
+luarocks install luafilesystem
