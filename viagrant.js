@@ -3,7 +3,7 @@
 const fs = require('fs')
 
 const targets = {
-	arangodb: ["ArangoDB 2.8.9", []],
+	arangodb: ["ArangoDB 3.0.0", []],
 	bower: ["Bower, the web package manager", ["node", "git"]],
 	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
 	c57: ["LAMP with concrete5 5.7.5.1", ["lamp"]],
