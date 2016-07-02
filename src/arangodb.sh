@@ -10,7 +10,7 @@ echo arangodb3 arangodb/password_again password "" | debconf-set-selections
 
 apt-get install apt-transport-https -y
 apt-get update
-apt-get install arangodb3=3.0.0 -y
+apt-get install arangodb3=3.0.1 -y
 
 # Change endpoint binding so the admin interface can be used with Vagrant port forwarding
 sed -i "s|^endpoint = tcp://127.0.0.1:8529|endpoint = tcp://0.0.0.0:8529|" /etc/arangodb3/arangod.conf
