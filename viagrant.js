@@ -17,7 +17,7 @@ const targets = {
 	lamp: ["Apache 2.2.22, Mysql 5.5.4, PHP 5.3", []],
 	lua: ["Lua 5.2", []],
 	mongodb: ["Latest MongoDB", []],
-	node: ["Node.js 5.11.1 with npm", []],
+	node: ["Node.js 4.4.7 with npm", []],
 	phantomjs: ["PhantomJS 1.9.8", ["node"]],
 	python3: ["Python 3.4", []],
 	ruby: ["Latest Ruby with rvm", []]
