@@ -14,7 +14,7 @@ const targets = {
 	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
 	haxe_targets: ["Haxe with environment for all targets", ["node", "phantomjs", "python3", "java", "lua", "haxe"]],
 	java: ["Java 8 JDK (openjdk)", []],
-	lamp: ["Apache 2.2.22, Mysql 5.5.4, PHP 5.3", []],
+	lamp: ["Apache 2.2.22, Mysql 5.5.4, PHP 5.5", []],
 	lua: ["Lua 5.2", []],
 	mongodb: ["Latest MongoDB", []],
 	node: ["Node.js 4.4.7 with npm", []],

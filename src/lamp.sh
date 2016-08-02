@@ -16,7 +16,9 @@ rm -rf /var/www
 ln -fs /vagrant/www /var/www
 
 echo "=== Installing PHP..."
-apt-get install -y php5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite php5-xdebug php-apc
+echo | add-apt-repository ppa:ondrej/php
+apt-get update
+apt-get install -y php5.5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite php5-xdebug php-apc
 
 cat > /etc/php5/conf.d/vagrant.ini <<EOL
 display_errors = On
