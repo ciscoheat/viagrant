@@ -3,21 +3,16 @@
 const fs = require('fs')
 
 const targets = {
-	arangodb: ["ArangoDB 3.0.1", []],
-	bower: ["Bower, the web package manager", ["node", "git"]],
-	c5: ["LAMP with concrete5 5.6.3.3", ["lamp"]],
+	arangodb: ["ArangoDB 3.1.10", []],
 	c57: ["LAMP with concrete5 5.7.5.1", ["lamp"]],
-	git: ["Git source control", []],
-	haxe: ["Haxe 3.2.1", []],
-	haxe33: ["Haxe 3.3.0-rc.1", []],
+	haxe: ["Haxe 3.4.0", []],
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
 	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
-	haxe_targets: ["Haxe with environment for all targets", ["node", "phantomjs", "python3", "java", "lua", "haxe"]],
-	java: ["Java 8 JDK (openjdk)", []],
+	haxe_targets: ["Haxe with environment for all targets", ["node", "haxe"]],
 	lamp: ["Apache 2.2.22, Mysql 5.5.4, PHP 5.5", []],
 	lua: ["Lua 5.2", []],
 	mongodb: ["Latest MongoDB", []],
-	node: ["Node.js 4.4.7 with npm", []],
+	node: ["Node.js 6.x", []],
 	phantomjs: ["PhantomJS 1.9.8", ["node"]],
 	python3: ["Python 3.4", []],
 	ruby: ["Latest Ruby with rvm", []]
@@ -106,14 +101,13 @@ for(let i in deps) {
 	let input = fs.readFileSync(file, {encoding: 'utf8'})
 
 	// Replace a special variable in footer.
-	if(deps[i] == "footer") {
-		const rename = name ? "sed -i 's/precise64/"+name+"/g' /etc/hostname /etc/hosts" : ''
-		input = input.replace('{{rename}}', rename)
-
-		if(name)
-			input = input.replace('{{reload}}', 'echo ""\necho "Execute \'vagrant reload\' to rename the VM and complete the process."')
-		else
-			input = input.replace('{{reload}}', '')
+	if(deps[i] == "footer" && name) {
+		const script = 
+"\necho \"=== Renaming host...\"\n\
+sed -i \"s/`cat /etc/hostname`/" + name + "/g\" /etc/hosts\n\
+echo " + name + " > /etc/hostname\n\
+systemctl restart systemd-logind.service"
+			input = input.replace('{{rename}}', script)
 	}
 
 	// Write to the provision file

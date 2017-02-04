@@ -1,9 +1,8 @@
 
-echo "=== Installing Haxe 3.2.1..."
-wget -q http://ciscoheat.github.io/cdn/haxe/haxe-3.2.1-linux-installer.sh
-sh haxe-3.2.1-linux-installer.sh -y >/dev/null 2>&1
-rm -f haxe-3.2.1-linux-installer.sh
+echo "=== Installing Haxe 3.4.0..."
+add-apt-repository ppa:haxe/releases -y
+apt-get update
+apt-get install haxe -y
 
-echo /usr/lib/haxe/lib/ | haxelib setup
-echo /usr/lib/haxe/lib/ > /home/vagrant/.haxelib
-chown vagrant:vagrant /home/vagrant/.haxelib
+sudo -i -u ubuntu sh -c 'echo /home/ubuntu/haxelib | haxelib setup'
+sudo -i -u ubuntu haxelib install travix

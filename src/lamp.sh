@@ -1,29 +1,33 @@
 
-mkdir www
-chown vagrant:vagrant www
-
 echo "=== Installing Apache..."
 apt-get install -y apache2
 
+[ ! -d /vagrant/www ] && sudo -i -u ubuntu mkdir /vagrant/www
+
 # Enable mod_rewrite, allow .htaccess and fix a virtualbox bug according to
 # https://github.com/mitchellh/vagrant/issues/351#issuecomment-1339640
-a2enmod rewrite
-sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/sites-enabled/000-default
-echo EnableSendFile Off > /etc/apache2/conf.d/virtualbox-bugfix
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/vagrant.conf
+sed -i 's|DocumentRoot.*|DocumentRoot /vagrant/www|' /etc/apache2/sites-available/vagrant.conf
+sed -i 's|ServerAdmin.*|<Directory "/vagrant/www">\n\t\tAllowOverride All\n\t\tRequire all granted\n\t</Directory>|' /etc/apache2/sites-available/vagrant.conf
+echo EnableSendFile Off > /etc/apache2/conf-available/virtualbox-bugfix.conf
 
-# Link to www dir
-rm -rf /var/www
-ln -fs /vagrant/www /var/www
+# Configure
+a2enmod rewrite
+a2ensite vagrant.conf
+a2dissite 000-default.conf
+a2enconf virtualbox-bugfix.conf
 
 echo "=== Installing PHP..."
-echo | add-apt-repository ppa:ondrej/php
-apt-get update
-apt-get install -y php5.5 php5-gd php5-mysql php5-curl php5-cli php5-sqlite php5-xdebug php-apc
+apt-get install -y php libapache2-mod-php php-gd php-mysql php-curl php-cli php-xdebug
 
-cat > /etc/php5/conf.d/vagrant.ini <<EOL
+cat > /etc/php/7.0/apache2/conf.d/vagrant.ini <<EOL
 display_errors = On
 html_errors = On
-xdebug.max_nesting_level=10000
+EOL
+ln -s /etc/php/7.0/apache2/conf.d/vagrant.ini /etc/php/7.0/cli/conf.d
+
+[ ! -d /vagrant/www/index.php ] && sudo -i -u ubuntu cat > /vagrant/www/index.php <<EOL
+<?php phpinfo();
 EOL
 
 echo "=== Installing PHP utilities (Composer)..."
@@ -36,7 +40,7 @@ echo "=== Installing Mysql..."
 export DEBIAN_FRONTEND=noninteractive
 apt-get -q -y install mysql-server mysql-client
 
-echo "=== Creating Mysql DB (test)..."
+echo "=== Creating Mysql test DB..."
 mysql -u root -e "create database test"
 
 echo "=== Restarting Apache..."

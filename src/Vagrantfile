@@ -11,13 +11,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # === This box is used exclusively for Viagrant provision scripts.
   # === Changing it may lead to unforeseen side-effects.
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "ubuntu/xenial64"
 
   # === SECURITY NOTICE:
-  # === If you're worrying about security and prefer not to use the shared
-  # === "insecure_private_key" in the VAGRANT_HOME directory instead of Vagrant
-  # === auto-generating a new one in the local .vagrant dir, comment this out:
-  config.ssh.insert_key = false
+  # === If you prefer to use the shared "insecure_private_key" in the VAGRANT_HOME 
+  # === directory instead of Vagrant auto-generating a new one in the local 
+  # === .vagrant dir, set to false:
+  config.ssh.insert_key = true
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

@@ -1,9 +1,5 @@
 
 echo "=== Installing Lua..."
-# Required repo for cmake (for luv library)
-add-apt-repository ppa:george-edison55/precise-backports
-apt-get update
-
 apt-get -y install lua5.2 make cmake unzip libpcre3 libpcre3-dev
 
 # Add source files so luarocks can be compiled

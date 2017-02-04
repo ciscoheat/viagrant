@@ -1,5 +1,4 @@
 
-echo "=== Installing Node.js..."
-curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
+echo "=== Installing Node.js 6.x..."
+curl --silent --location https://deb.nodesource.com/setup_6.x | sudo bash -
 apt-get install nodejs -y
-# npm config set spin=false
