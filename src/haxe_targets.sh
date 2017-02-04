@@ -1,5 +1,3 @@
-# Node will be installed as a dependency.
-
 echo "=== Installing Haxe targets:"
 
 echo "=== Installing C++..."

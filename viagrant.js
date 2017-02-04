@@ -9,7 +9,7 @@ const targets = {
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
 	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
 	haxe_targets: ["Haxe with environment for all targets", ["node", "haxe"]],
-	lamp: ["Apache 2.2.22, Mysql 5.5.4, PHP 5.5", []],
+	lamp: ["Apache 2, Mysql 5, PHP 7", []],
 	lua: ["Lua 5.2", []],
 	mongodb: ["Latest MongoDB", []],
 	node: ["Node.js 6.x", []],
@@ -76,13 +76,14 @@ let deps = ["header"]
 
 function addDeps(name) {
 	if(deps.indexOf(name) >= 0) return
+
+	if(targets[name]) {
+		targets[name][1].forEach(function(target) {
+			addDeps(target);
+		})
+	}
+
 	deps.push(name)
-
-	if(!targets[name]) return
-
-	targets[name][1].forEach(function(target) {
-		addDeps(target);
-	})
 }
 
 for(let i in process.argv) addDeps(process.argv[i])
