@@ -5,7 +5,7 @@ const fs = require('fs')
 const targets = {
 	arangodb: ["ArangoDB 3.1.10", []],
 	c57: ["LAMP with concrete5 5.7.5.1", ["lamp"]],
-	haxe: ["Haxe 3.4.0", []],
+	haxe: ["Haxe 3.4", []],
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
 	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
 	haxe_targets: ["Haxe with environment for all targets", ["node", "haxe"]],
@@ -13,7 +13,6 @@ const targets = {
 	lua: ["Lua 5.2", []],
 	mongodb: ["Latest MongoDB", []],
 	node: ["Node.js 6.x", []],
-	phantomjs: ["PhantomJS 1.9.8", ["node"]],
 	python3: ["Python 3.4", []],
 	ruby: ["Latest Ruby with rvm", []]
 }
