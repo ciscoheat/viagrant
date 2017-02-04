@@ -1,7 +1,7 @@
 echo "=== Installing Haxe targets:"
 
-#echo "=== Installing C++..."
-#apt-get install -y gcc-multilib g++-multilib
+echo "=== Installing C++..."
+apt-get install -y g++
 
 echo "=== Installing C#..."
 apt-get install -y mono-devel mono-mcs
