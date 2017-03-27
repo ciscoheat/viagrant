@@ -5,6 +5,7 @@ const fs = require('fs')
 const targets = {
 	arangodb: ["ArangoDB 3.1.10", []],
 	c57: ["LAMP with concrete5 5.7.5.1", ["lamp"]],
+	clean: ["Clean installation", []],
 	haxe: ["Haxe 3.4", []],
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
 	haxe_mod_neko: ["LAMP with Haxe and mod_neko", ["lamp", "haxe"]],
@@ -36,7 +37,7 @@ const args = (function(args) {
 
 // Usage
 if(!process.argv[2] || !(process.argv[2] in targets)) {
-	console.log('Usage: node viagrant.js [-p 4567:80] [-o "bin"] [-n "servername"] <main-target> <targets...>' + '\n');
+	console.log('Usage: node viagrant.js [-p 4567:80] [-o "bin"] [-n "servername"] <main-target> [targets...]' + '\n');
 	console.log('Available targets');
 	console.log('=================');
 	for(let key in targets) {
@@ -101,13 +102,16 @@ for(let i in deps) {
 	let input = fs.readFileSync(file, {encoding: 'utf8'})
 
 	// Replace a special variable in footer.
-	if(deps[i] == "footer" && name) {
-		const script = 
+	if(deps[i] == "footer") {
+		var script = ''
+		if(name) {
+			script = 
 "\necho \"=== Renaming host...\"\n\
 sed -i \"s/`cat /etc/hostname`/" + name + "/g\" /etc/hosts\n\
 echo " + name + " > /etc/hostname\n\
 systemctl restart systemd-logind.service"
-			input = input.replace('{{rename}}', script)
+		}
+		input = input.replace('{{rename}}', script)
 	}
 
 	// Write to the provision file

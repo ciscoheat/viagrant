@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+echo "=== Setting password for user ubuntu to ubuntu"
+
+echo "ubuntu:ubuntu" | chpasswd
+
 echo "=== Starting provision script..."
 
 cd /vagrant
