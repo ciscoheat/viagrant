@@ -5,6 +5,7 @@ const fs = require('fs')
 const targets = {
 	arangodb: ["ArangoDB 3.1.10", []],
 	c57: ["LAMP with concrete5 5.7.5.1", ["lamp"]],
+	c58: ["LAMP with concrete5 8.1.0", ["lamp"]],
 	clean: ["Clean installation", []],
 	haxe: ["Haxe 3.4", []],
 	haxe_full: ["Haxe for all targets and LAMP with mod_neko", ["haxe_mod_neko", "haxe_targets"]],
