@@ -18,7 +18,7 @@ a2dissite 000-default.conf
 a2enconf virtualbox-bugfix.conf
 
 echo "=== Installing PHP..."
-apt-get install -y php libapache2-mod-php php-gd php-mysql php-curl php-cli php-xdebug
+apt-get install -y php libapache2-mod-php php-gd php-mysql php-curl php-cli php-xdebug php-xml
 
 cat > /etc/php/7.0/apache2/conf.d/vagrant.ini <<EOL
 display_errors = On

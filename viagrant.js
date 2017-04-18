@@ -63,7 +63,7 @@ try {
 } catch(_) {}
 
 // Replace variables in the Vagrantfile
-const forward = (ports[0] == 0 ? "# " : "") + `config.vm.network "forwarded_port", guest: ${ports[1]}, host: ${ports[0]}`
+const forward = (ports[0] == 0 ? "# " : "") + `config.vm.network "forwarded_port", guest: ${ports[1]}, host: ${ports[0]}, host_ip: "127.0.0.1"`
 
 let vagrantFile = fs.readFileSync(srcdir + '/Vagrantfile', {encoding: 'utf8'})
 vagrantFile = vagrantFile.replace('{{forwarded_port}}', forward)

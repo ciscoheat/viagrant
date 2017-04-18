@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
 
-echo "=== Setting password for user ubuntu to ubuntu"
-
-echo "ubuntu:ubuntu" | chpasswd
-
 echo "=== Starting provision script..."
 
 cd /vagrant
 
-echo "=== Adding 'cd /vagrant' to .profile"
-cat >> /home/ubuntu/.profile <<EOL
+echo "=== Setting password for user ubuntu to ubuntu"
 
-cd /vagrant
-EOL
+echo "ubuntu:ubuntu" | chpasswd
 
 echo "=== Updating apt..."
 apt-get update >/dev/null 2>&1
