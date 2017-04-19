@@ -15,7 +15,8 @@ fi
 
 echo "=== Unzipping concrete5..."
 # Become ubuntu user to set file ownership correctly:
-su ubuntu -c 'unzip -q concrete5*'
+sudo -u ubuntu unzip -q concrete5*
+sudo -u ubuntu mkdir -p www
 rm -f www/index.php
 mv -n concrete5*/* www
 rm -rf concrete5*/*
@@ -36,4 +37,4 @@ sudo -u ubuntu cat > www/.htaccess <<EOL
 
 EOL
 
-echo "=== concrete5-8 ready to install. ==="
+echo "=== concrete5-8 ready to install. Use 'c5' as database information. ==="
